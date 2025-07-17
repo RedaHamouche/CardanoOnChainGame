@@ -1,5 +1,3 @@
-use aiken/builtin
-use aiken/collection/list
 use cardano/transaction.{OutputReference, Redeemer, Transaction}
 
 pub type BetDatum {

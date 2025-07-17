@@ -6,7 +6,7 @@
 
 - Projet initialisé dans `contracts/ada_price_guess`.
 - Logique du validateur écrite (vérification du datum, compilation OK).
-- ✅ Compilation passe avec la logique minimale (vérification du datum uniquement).
+- ✅ Compilation passe sans aucun warning ni erreur (logique minimale).
 
 ### Backend (Node.js/Express)
 
