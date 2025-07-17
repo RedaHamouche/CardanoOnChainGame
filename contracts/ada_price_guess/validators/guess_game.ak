@@ -12,6 +12,13 @@ use aiken/time.{POSIXTime}
 //   "timestamp": 1657891234
 // }
 
+const ONE_ADA: Int = 1_000_000
+const FEE_PERCENT: Int = 1 // 1%
+const FEE_ADA: Int = 10_000 // 0.01 ADA (1% de 1 ADA)
+const HOUR_13_UTC5: Int = 13 * 60 * 60 // 13h00 UTC-5
+const HOUR_16_UTC5: Int = 16 * 60 * 60 // 16h00 UTC-5
+const HOUR_12_UTC: Int = 12 * 60 * 60 // 12h00 UTC
+
 type BetDatum {
   wallet: String,
   prediction: FixedDecimal,
@@ -19,13 +26,6 @@ type BetDatum {
   message: String,
   timestamp: Int
 }
-
-const ONE_ADA: Int = 1_000_000
-const FEE_PERCENT: Int = 1 // 1%
-const FEE_ADA: Int = 10_000 // 0.01 ADA (1% de 1 ADA)
-const HOUR_13_UTC5: Int = 13 * 60 * 60 // 13h00 UTC-5
-const HOUR_16_UTC5: Int = 16 * 60 * 60 // 16h00 UTC-5
-const HOUR_12_UTC: Int = 12 * 60 * 60 // 12h00 UTC
 
 validator guess_game {
   spend(datum: Option<Data>, redeemer: Data, utxo: OutputReference, self: Transaction) {

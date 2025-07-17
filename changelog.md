@@ -1,15 +1,45 @@
 # Changelog
 
-## Versions
+## 0.3 (en cours)
 
-### 0.2 (en cours)
+### Smart Contract (Aiken)
+
+- Projet initialisé dans `contracts/ada_price_guess`.
+- Logique du validateur écrite (vérification 1 ADA, time window, timelock, 1% fee, 1 bet/jour/wallet, etc).
+- ❌ Compilation échoue actuellement à cause de la déclaration des constantes globales (`const ONE_ADA`, etc). À corriger.
+
+### Backend (Node.js/Express)
+
+- Projet initialisé avec Express, TypeScript, Blockfrost, etc.
+- API scaffoldée (leaderboard, history, pool size).
+- ✅ Tests Jest fonctionnels (smoke test OK).
+- Script `test` ajouté dans le `package.json`.
+
+### Frontend (Expo/React Native)
+
+- Projet Expo initialisé proprement.
+- Config Jest/Testing Library conforme à la doc Expo.
+- ✅ Tests unitaires React Native fonctionnels (test avancé sur App.js OK).
+- Suppression des tests/configs temporaires.
+
+---
+
+## 0.2
 
 - Début du développement du smart contract Aiken (logique de pari)
 - Ajout de la vérification du montant (1 ADA)
 - Ajout de la vérification de la fenêtre horaire (13h00–16h00 UTC-5)
-- Prochaines étapes : unicité wallet/jour, TimeLock, prélèvement 1%, etc.
+- Vérification unicité wallet/jour (on-chain limitée, off-chain à faire)
+- TimeLock jusqu’au lendemain 12h00 UTC
+- Prélèvement automatique de 1% pour l’application
+- **Backend** :
+  - Installation et configuration Express, CORS, dotenv, nodemon
+  - Intégration de Blockfrost (récupération UTxOs du smart contract)
+  - Création d’un module utilitaire blockfrost.ts
+  - Mise en place des routes principales de l’API REST (leaderboard, historique, pool)
+  - Structure prête pour l’implémentation métier
 
-### 0.1 (terminée)
+## 0.1
 
 - Initialisation du projet principal avec `yarn init -y`
 - Création de la structure de dossiers : contracts/, backend/, frontend/, docs/
@@ -21,38 +51,9 @@
 
 ---
 
-# Journal de bord – Mise en place initiale
+**_Prochaine étape recommandée_**
 
-## Tâches effectuées
+Corriger la déclaration des constantes dans le smart contract Aiken pour permettre la compilation.
 
-- Initialisation du projet principal avec `yarn init -y`
-- Création de la structure de dossiers :
-  - `contracts/` (smart contract Aiken)
-  - `backend/` (Node.js backend)
-  - `frontend/` (React Native app)
-  - `docs/` (documentation)
-- Configuration de Yarn workspaces dans le `package.json` racine
-- Initialisation du backend :
-  - `yarn init -y` dans `backend/`
-  - Installation des dépendances : `typescript`, `ts-node`, `@types/node`, `dotenv`, `axios`
-  - Ajout d'un script de démarrage TypeScript (`yarn start`)
-  - Création du dossier `src/` et d'un fichier `src/index.ts`
-  - Initialisation de la config TypeScript (`tsconfig.json`)
-- Initialisation du frontend :
-  - `yarn init -y` dans `frontend/`
-  - Installation des dépendances : `react`, `react-native`, `expo`, `@react-navigation/native`
-  - Ajout d'un script de démarrage TypeScript temporaire (`yarn start`)
-  - Création du dossier `src/` et d'un fichier `src/index.ts`
-  - Initialisation de la config TypeScript (`tsconfig.json`)
-- Initialisation du dossier `contracts/` avec `yarn init -y`
-- Initialisation d'un projet Aiken pour le smart contract : `aiken new top_ten_game/ada_price_guess`
-
----
-
-**Prochaine étape recommandée :**
-
-- Débuter le développement du smart contract Aiken (logique de pari)
-- Débuter la structure du backend (API, intégration Blockfrost)
-- Mettre en place la structure Expo pour le frontend
-- Ajouter des tests de base pour chaque sous-projet
-- Versionner le tout avec git (si ce n'est pas déjà fait)
+- Déplacer les constantes dans le corps du validator ou utiliser la syntaxe supportée par la version d’Aiken.
+- Relancer `aiken check` pour valider la compilation.
