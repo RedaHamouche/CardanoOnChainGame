@@ -80,6 +80,14 @@ top_ten_game/
 
 ---
 
+## 💡 Architecture recommandée (Cardano dApp)
+
+- Le frontend construit la transaction, l’utilisateur signe avec son wallet (Eternl, Lace, Nami, etc.) et la soumet directement à la blockchain.
+- Le backend sert uniquement à exposer l’API de leaderboard, historique, récupération des prix ADA/USD, etc. (lecture seule, pas de signature de transaction utilisateur).
+- Ce modèle maximise la sécurité, la décentralisation et la transparence, tout en gardant une UX fluide et crypto-native.
+
+---
+
 ## 📝 TODOs (boussole projet)
 
 - [ ] Initialiser la structure de dossier

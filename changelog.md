@@ -1,5 +1,22 @@
 # Changelog
 
+## [2025-07-17]
+- Validation de l'architecture Cardano dApp (frontend signe/soumet, backend lecture seule)
+- Refactor complet du smart contract `guess_game.ak` (montant, fenêtre horaire, unicité, timelock, frais)
+- Ajout d'une section architecture dApp dans le README.md
+- Ajout d'une roadmap détaillée (roadmap.md)
+- Nettoyage des imports et correction des erreurs de compilation Aiken
+- Conseils sur la priorisation, la structure de projet, et la philosophie dApp Cardano
+
+## [2025-07-16]
+- Initialisation du projet, définition des règles du jeu et choix des technos
+- Création de la structure de dossier recommandée
+- Rédaction du README.md (vision, jalons, architecture, TODOs)
+
+---
+
+# Changelog – ADA Price Guess Game
+
 ## 0.3 (en cours)
 
 ### Smart Contract (Aiken)

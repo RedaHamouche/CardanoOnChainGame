@@ -1,0 +1,73 @@
+use aiken/collection/list
+use cardano/address.{VerificationKey}
+use cardano/assets
+use cardano/transaction.{InlineDatum, OutputReference, Transaction}
+use course/types.{MBuy, MDelist, MEdit, MarketAction, MarketDatum}
+
+validator market {
+  spend(
+    datum: Option<MarketDatum>,
+    r: MarketAction,
+    oref: OutputReference,
+    tx: Transaction,
+  ) {
+    expect Some(d) = datum
+
+    // Sell assets for fixed price ADA
+    // Seller can remove assets (Delist)
+    // Seller can update listing ( Edit )
+    // Anyone can buy if they pay the seller ( Buy)
+    when r is {
+      MBuy -> {
+        // Seller gets paid the listed amount
+        expect Some(payment) =
+          list.find(
+            tx.outputs,
+            fn(output) {
+              output.address.payment_credential == VerificationKey(d.seller)
+            },
+          )
+
+        // Return: payment value is correct
+        assets.lovelace_of(payment.value) == d.price
+      }
+
+      MEdit { price } -> {
+        // change MarketDatum.price -> return to marketplace
+        expect Some(ownInput) =
+          list.find(tx.inputs, fn(input) { input.output_reference == oref })
+
+        // Optionally, add further checks or logic here if needed
+        let ownHash = ownInput.output.address.payment_credential
+
+        // script Output has same Value
+        expect Some(ownOutput) =
+          list.find(
+            tx.outputs,
+            fn(output) {
+              output.address.payment_credential == ownHash && output.value == ownInput.output.value
+            },
+          )
+
+        // check output Datum is MarketDatum
+        expect InlineDatum(datum) = ownOutput.datum
+        expect newDatum: MarketDatum = datum
+
+        // Return:
+        and {
+          newDatum.seller == d.seller,
+          newDatum.price == price,
+          list.has(tx.extra_signatories, d.seller),
+        }
+      }
+
+      MDelist ->
+        // Return: Only if signed by seller
+        list.has(tx.extra_signatories, d.seller)
+    }
+  }
+
+  else(_) {
+    fail
+  }
+}
