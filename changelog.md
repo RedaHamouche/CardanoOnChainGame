@@ -5,8 +5,8 @@
 ### Smart Contract (Aiken)
 
 - Projet initialisé dans `contracts/ada_price_guess`.
-- Logique du validateur écrite (vérification 1 ADA, time window, timelock, 1% fee, 1 bet/jour/wallet, etc).
-- ❌ Compilation échoue actuellement à cause de la déclaration des constantes globales (`const ONE_ADA`, etc). À corriger.
+- Logique du validateur écrite (vérification du datum, compilation OK).
+- ✅ Compilation passe avec la logique minimale (vérification du datum uniquement).
 
 ### Backend (Node.js/Express)
 
@@ -53,7 +53,10 @@
 
 **_Prochaine étape recommandée_**
 
-Corriger la déclaration des constantes dans le smart contract Aiken pour permettre la compilation.
-
-- Déplacer les constantes dans le corps du validator ou utiliser la syntaxe supportée par la version d’Aiken.
-- Relancer `aiken check` pour valider la compilation.
+1. Ajouter la vérification du montant ADA reçu par le script (matcher Output/OutputReference).
+2. Implémenter la vérification de la fenêtre horaire (13h-16h UTC-5).
+3. Implémenter la vérification 1 pari/wallet/jour.
+4. Stocker la prédiction, pseudo, message, timestamp dans InlineDatum.
+5. Ajouter le TimeLock jusqu’à 12h00 UTC lendemain.
+6. Prélèvement automatique de 1% pour l’application.
+7. Ajouter des tests unitaires pour chaque règle.
