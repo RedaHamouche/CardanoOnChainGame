@@ -1,0 +1,12 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@react-navigation/native": "^7.1.14",
+    "expo": "^53.0.19",
+    "react": "^19.1.0",
+    "react-native": "^0.80.1"
+  }
+}

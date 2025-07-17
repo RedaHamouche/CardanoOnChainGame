@@ -1,0 +1,12 @@
+{
+  "name": "top_ten_game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "contracts",
+    "backend",
+    "frontend"
+  ]
+}

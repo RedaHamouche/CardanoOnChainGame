@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+.env
+.env.*
+dist/
+build/
+logs/
+*.log
+yarn-error.log
+
+# TypeScript
+*.tsbuildinfo
+
+# React Native/Expo
+.expo/
+.expo-shared/
+web-build/
+
+# MacOS
+.DS_Store
+
+# Aiken (Cardano smart contract)
+*.aiken
+*.aiken-package
+
+# IDEs
+.vscode/
+.idea/
+
+# Misc
+coverage/ 
